@@ -1,6 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
-function AddUser() {
+const API_URL = 'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.picard.replit.dev/v1/chats';
+
+const AddUser = ({ setOnAddPage, onAddPage }) => {
+  const { token } = useAuth();
+  const [username, setUsername] = useState();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
+  
+  const handleAddUser = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const options = {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ username: username }),
+    }
+
+    fetch(API_URL, options)
+      .then(response => response.json())
+      .then(result => {
+        if (result.status >= 400) {
+          throw new Error('Server error');
+        } else {
+          setData(result);
+        }
+      })
+      .catch(err => setError(err))
+      .finally(() => {
+        setLoading(false)
+        setOnAddPage(!onAddPage);
+      });
+  }
+  
   return (
     <div className="flex h-full flex-col items-center justify-center p-4">
       <h1 className="text-primary text-center !text-4xl">Add by Username</h1>
@@ -12,11 +52,13 @@ function AddUser() {
           type="text"
           name="username"
           id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           minLength="1"
           maxLength="25"
           placeholder="Enter a username"
         />
-        <button className="button button-primary !w-full" type="submit">
+        <button className="button button-primary !w-full" type="submit" onClick={handleAddUser}>
           Add
         </button>
       </form>

@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import NetWorkChats from './NetWorkChats';
 import AddUser from './AddUser';
 
-const Network = ({ onNetworkPage, setOnNetworkPage }) => {
+const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
   const [onAddPage, setOnAddPage] = useState(false);
   const { signOut } = useAuth();
 
@@ -47,7 +47,7 @@ const Network = ({ onNetworkPage, setOnNetworkPage }) => {
           chat
         </button>
       </div>
-      {onAddPage ? <AddUser /> : <NetWorkChats />}
+      {onAddPage ? <AddUser setOnAddPage={setOnAddPage} onAddPage={onAddPage} /> : <NetWorkChats setChatId={setChatId} onNetworkPage={onNetworkPage} setOnNetworkPage={setOnNetworkPage} />}
     </section>
   );
 }

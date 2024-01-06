@@ -9,11 +9,10 @@ import SignUp from '../components/SignUp';
 
 const AuthPage = () => {
   const { authType } = useParams();
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
-  
+
   return (
     loading ? <Loading /> :
     <div className="flex h-screen w-full flex-col items-center justify-between py-4">

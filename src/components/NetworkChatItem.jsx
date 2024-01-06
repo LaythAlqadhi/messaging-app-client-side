@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import formatDate from '../utils/formatDate';
 import defaultPFP from '../assets/defaultPFP.png';
 
-function NetworkChatItem({ pfp, username, content, date }) {
+function NetworkChatItem({ pfp, username, content, date, onClick }) {
   return (
-    <div className="flex items-center gap-4 border border-b-2 border-gray-200 p-4">
+    <button className="flex items-center gap-4 border border-b-2 border-gray-200 p-4 cursor-pointer w-full" onClick={onClick}>
       <img
         className="pointer-events-none h-20 w-20 rounded-full object-cover"
         src={pfp}
@@ -18,7 +18,7 @@ function NetworkChatItem({ pfp, username, content, date }) {
       <span className="text-secondary ml-auto min-w-fit">
         {formatDate(date)}
       </span>
-    </div>
+    </button>
   );
 }
 

@@ -30,7 +30,7 @@ NetworkChatItem.propTypes = {
   pfp: PropTypes.string,
   username: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
+  date: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export default NetworkChatItem;

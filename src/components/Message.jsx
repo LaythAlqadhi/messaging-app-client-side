@@ -12,7 +12,7 @@ function Message({ isSender, pfp, username, content, date }) {
       <span className="text-secondary absolute -top-5 right-3 w-fit !text-sm">
         Me
       </span>
-      <span className="text-secondary absolute top-1/2 -left-2 -translate-x-1/2 -translate-y-1/2 w-fit !text-sm">
+      <span className={`text-secondary absolute top-1/2 -left-2 -translate-x-1/2 -translate-y-1/2 w-fit !text-sm`}>
         {formatDate(date)}
       </span>
     </div>

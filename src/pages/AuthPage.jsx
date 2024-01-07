@@ -11,16 +11,15 @@ const AuthPage = () => {
   const { authType } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState(null);
 
   return (
     loading ? <Loading /> :
     <div className="flex h-screen w-full flex-col items-center justify-between py-4">
-      {error || message && <TopBarAlert message={message} />}
+      {error && <TopBarAlert message={error} />}
       {authType === 'signin' ? (
         <>
           <Header content="Sign In to get started." />
-          <SignIn setLoading={setLoading} setError={setError} setMessage={setMessage} />
+          <SignIn setLoading={setLoading} setError={setError} />
         </>
       ) : (
         <>

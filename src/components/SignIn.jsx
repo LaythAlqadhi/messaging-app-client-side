@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 const API_URL = 'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.picard.replit.dev/v1/user/login';
 
 
-const SignIn = ({ setLoading, setError, setMessage }) => {
+const SignIn = ({ setLoading, setError }) => {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [body, setBody] = useState({ username: '', password: '' });
@@ -29,7 +29,7 @@ const SignIn = ({ setLoading, setError, setMessage }) => {
         if (result.status >= 400) {
           throw new Error('Server error');
         } else if (result.errors) {
-          setMessage(result.errors[0].msg);
+          throw new Error(result.errors[0].msg);
         } else {
           signIn(result.token);
           navigate('/');

@@ -46,8 +46,8 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
   
   const handleSendMessage = (e) => {
     e.preventDefault();
-    setLoading(true);
     setMessage('')
+    setLoading(true);
 
     const options = {
       mode: 'cors',
@@ -67,8 +67,7 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
       .then(result => {
         if (result.status >= 400) {
           throw new Error('Server error');
-        } 
-        console.log(result)
+        }
       })
       .catch(err => setError(err))
       .finally(() => {
@@ -111,7 +110,7 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
         </button>
 
         <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          John Doe
+          Chat
         </span>
       </div>
 
@@ -121,7 +120,7 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
       >
 
         {data && data.messages.map(msg => (
-          <Message isSender={msg.isSender} username={msg.user.fullName} content={msg.content} date={msg.createdAt} />
+          <Message key={msg.id} isSender={msg.isSender} username={msg.user.fullName} content={msg.content} date={msg.createdAt} />
         ))}
         
       </div>
@@ -158,6 +157,8 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
             className="material-symbols-outlined cursor-pointer active:scale-95"
             type="button"
             aria-label="Like"
+            onMouseDown={() => setMessage('\u{1F44D}')}
+            onMouseUp={handleSendMessage}
           >
             thumb_up
           </button>

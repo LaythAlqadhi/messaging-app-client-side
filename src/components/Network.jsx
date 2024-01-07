@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAuth } from '../contexts/AuthContext';
-import NetWorkChats from './NetWorkChats';
+import NetworkChats from './NetworkChats';
 import AddUser from './AddUser';
 
 const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
@@ -47,7 +47,7 @@ const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
           chat
         </button>
       </div>
-      {onAddPage ? <AddUser setOnAddPage={setOnAddPage} onAddPage={onAddPage} /> : <NetWorkChats setChatId={setChatId} onNetworkPage={onNetworkPage} setOnNetworkPage={setOnNetworkPage} />}
+      {onAddPage ? <AddUser setOnAddPage={setOnAddPage} onAddPage={onAddPage} /> : <NetworkChats setChatId={setChatId} onNetworkPage={onNetworkPage} setOnNetworkPage={setOnNetworkPage} />}
     </section>
   );
 }

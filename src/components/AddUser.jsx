@@ -5,7 +5,7 @@ const API_URL = 'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.pic
 
 const AddUser = ({ setOnAddPage, onAddPage }) => {
   const { token } = useAuth();
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState('');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

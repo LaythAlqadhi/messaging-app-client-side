@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
+import NotFoundPage from '../pages/NotFoundPage';
 
 const AuthPage = () => {
   const { authType } = useParams();
@@ -21,12 +22,12 @@ const AuthPage = () => {
           <Header content="Sign In to get started." />
           <SignIn setLoading={setLoading} setError={setError} />
         </>
-      ) : (
+      ) : authType === 'signup' ? (
         <>
           <Header content="Sign Up to get started." />
           <SignUp setLoading={setLoading} setError={setError} />
         </>
-      )}
+      ) : <NotFoundPage />}
       <Footer />
     </div>
   );

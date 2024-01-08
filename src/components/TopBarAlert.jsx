@@ -11,7 +11,7 @@ const TopBarAlert = ({ message, className }) => {
   
   return (
     trigger &&
-    <span className={`${className} -mt-4 w-full bg-red-500 p-2 text-white`} role="alert" aria-live="assertive">
+    <span className={`${className} z-50 -mt-4 w-full bg-red-500 p-2 text-white`} role="alert" aria-live="assertive">
       {message}
     </span>
   );

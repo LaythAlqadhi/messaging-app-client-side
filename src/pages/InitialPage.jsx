@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import TopBarAlert from '../components/TopBarAlert';
+import formatErrorMessage from '../utils/formatErrorMessage';
 import Loading from '../components/Loading';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -25,7 +26,7 @@ const InitialPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: 'JohnDoe',
+        username: 'DemoAccount',
         password: 'SecurePass123!',
       }),
     }
@@ -36,13 +37,13 @@ const InitialPage = () => {
         if (result.status >= 400) {
           throw new Error('Server error');
         } else if (result.errors) {
-          throw new Error(result.errors[0].msg);
+          setError(result.errors[0].msg);
         } else {
           signIn(result.token);
           navigate('/');
         }
       })
-      .catch(err => setError(err))
+      .catch(err => setError(formatErrorMessage(err.message)))
       .finally(() => setLoading(false));
   }
   

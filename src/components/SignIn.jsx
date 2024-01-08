@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import formatErrorMessage from '../utils/formatErrorMessage';
 
 const API_URL = 'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.picard.replit.dev/v1/user/login';
 
@@ -29,13 +30,13 @@ const SignIn = ({ setLoading, setError }) => {
         if (result.status >= 400) {
           throw new Error('Server error');
         } else if (result.errors) {
-          throw new Error(result.errors[0].msg);
+          setError(result.errors[0].msg);
         } else {
           signIn(result.token);
           navigate('/');
         }
       })
-      .catch(err => setError(err))
+      .catch(err => setError(formatErrorMessage(err.message)))
       .finally(() => setLoading(false));
   }
   

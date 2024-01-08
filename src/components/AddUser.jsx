@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import Loading from './Loading';
 import TopBarAlert from './TopBarAlert';
+import formatErrorMessage from '../utils/formatErrorMessage';
 
 const API_URL = 'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.picard.replit.dev/v1/chats';
 
@@ -31,12 +32,12 @@ const AddUser = ({ setOnAddPage, onAddPage }) => {
         if (result.status >= 400) {
           throw new Error('Server error');
         } else if (result.errors) {
-          throw new Error(result.errors[0].msg);
+          setError(result.errors[0].msg);
         } else {
           setOnAddPage(!onAddPage);
         }
       })
-      .catch(err => setError(err.message))
+      .catch(err => setError(formatErrorMessage(err.message)))
       .finally(() => {
         setLoading(false);
       });

@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 import { useAuth } from '../contexts/AuthContext';
 import Message from './Message';
 import Loading from './Loading';
 import TopBarAlert from './TopBarAlert';
+import formatErrorMessage from '../utils/formatErrorMessage';
 
 const API_URL = 'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.picard.replit.dev/v1/chats';
 
@@ -14,45 +16,52 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
-  const [trigger, setTrigger] = useState(false);
   
   useEffect(() => {
-      const options = {
-        mode: 'cors',
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      }
-
+    const options = {
+      mode: 'cors',
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    }
+    
+    if (chatId) {
       fetch(`${API_URL}/${chatId}`, options)
-        .then(response => response.json())
-        .then(result => {
-          if (result.status >= 400) {
-            throw new Error('Server error');
-          } else if (result.errors) {
-            setError(result.errors[0].msg);
-          } else {
-            setData(result);
-          }
-        })
-        .catch(err => setError(err.message))
-  }, [chatId, trigger]);
+      .then(response => response.json())
+      .then(result => {
+        if (result.status >= 400) {
+          throw new Error('Server error');
+        } else if (result.errors) {
+          setError(result.errors[0].msg);
+        } else {
+          setData(result);
+        }
+      })
+      .catch(err => setError(formatErrorMessage(err.message)))
+    }
+  }, [chatId, token]);
   
   const handleSendMessage = (e) => {
     e.preventDefault();
+    
+    const messageId = uuidv4();
+
     setData({
       ...data,
       messages: [
         ...data.messages,
         {
-          id: 'newMessageId',
+          id: messageId,
           isSender: true,
           content: message,
-          createdAt: null,
+          createdAt: Date.now(),
+          status: 'Loading',
           user: {
-            fullName: 'Me',
+            profile: {
+              fullName: 'Me',
+            },
           },
         },
       ],
@@ -79,10 +88,29 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
         if (result.status >= 400) {
           throw new Error('Server error');
         }
-        setTrigger(!trigger);
+        updateMessageStatus(messageId, 'Success');
       })
-      .catch(err => setError(err))
+      .catch(err => updateMessageStatus(messageId, 'Error'));
   }
+
+  const updateMessageStatus = (id, status) => {
+    setData(prevData => {
+      const updatedMessages = prevData.messages.map(msg => {
+        if (msg.id === id) {
+          return {
+            ...msg,
+            status: status,
+          };
+        }
+        return msg;
+      });
+
+      return {
+        ...prevData,
+        messages: updatedMessages,
+      };
+    });
+  };
 
   const scrollToBottom = () => {
     messagesContainerRef.current.scrollTop =
@@ -121,13 +149,19 @@ const Chat = ({ onNetworkPage, setOnNetworkPage, chatId }) => {
             Chat
           </span>
         </div>
-        {error && <TopBarAlert className="mt-0" message='error' />}
+        {error && <TopBarAlert className="mt-0" message={error} />}
         <div
           ref={messagesContainerRef}
           className="flex h-[calc(100%-6.5rem)]  mb-aito flex-col gap-8 overflow-y-auto p-4 pt-8"
         >
           {data && data.messages.map(msg => (
-            <Message key={msg.id} isSender={msg.isSender} username={msg.user.fullName} content={msg.content} date={msg.createdAt}
+            <Message
+              key={msg['_id']}
+              isSender={msg.isSender}
+              username={msg.user.profile.fullName}
+              content={msg.content}
+              date={msg.createdAt}
+              status={msg.status}
             />
           ))}
         </div>

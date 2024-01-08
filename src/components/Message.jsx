@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import formatDate from '../utils/formatDate';
 import defaultPFP from '../assets/defaultPFP.png';
 
-function Message({ isSender, pfp, username, content, date }) {
+function Message({ isSender, pfp, username, content, date, status }) {
   return isSender ? (
     <div className="relative ml-auto flex w-fit items-end">
       <span className="ml-2 max-w-xs rounded-2xl bg-blue-500 p-3 text-white sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
@@ -12,8 +12,12 @@ function Message({ isSender, pfp, username, content, date }) {
       <span className="text-secondary absolute -top-5 right-3 w-fit !text-sm">
         Me
       </span>
-      <span className={`text-secondary absolute top-1/2 -left-2 -translate-x-1/2 -translate-y-1/2 w-fit !text-sm`}>
-        {formatDate(date)}
+      <span className={`text-secondary absolute top-1/2 -left-3 -translate-x-1/2 -translate-y-1/2 w-fit !text-sm`}>
+        {status === 'Success' ?
+          formatDate(date) :
+          status === 'Loading' ?
+          <span className="inline-block animate-spin rounded-full h-4 w-4 border-2 border-gray-200 border-t-blue-500"></span> :
+        <span className="text-red-500">Error</span>}
       </span>
     </div>
   ) : (
@@ -26,7 +30,7 @@ function Message({ isSender, pfp, username, content, date }) {
       <span className="ml-2 max-w-xs rounded-2xl bg-gray-100 p-3 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
         {content}
       </span>
-      <span className="text-secondary absolute -top-5 left-[4.25rem] w-fit !text-sm">
+      <span className="text-secondary absolute -top-5 left-[4.5rem] w-fit !text-sm">
         {username}
       </span>
     </div>

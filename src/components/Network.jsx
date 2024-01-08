@@ -4,10 +4,11 @@ import { useAuth } from '../contexts/AuthContext';
 import NetworkChats from './NetworkChats';
 import AddUser from './AddUser';
 
-const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
+function Network({ onNetworkPage, setOnNetworkPage, setChatId }) {
   const [onAddPage, setOnAddPage] = useState(false);
   const { signOut } = useAuth();
 
+  /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
   return (
     <section
       className={`${
@@ -31,8 +32,8 @@ const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
           Network
         </span>
         <button
-          className="material-symbols-outlined cursor-pointer active:scale-95 ml-auto mr-4"
-           type="button"
+          className="material-symbols-outlined ml-auto mr-4 cursor-pointer active:scale-95"
+          type="button"
           onClick={() => setOnAddPage(!onAddPage)}
           aria-label={onAddPage ? 'Cancel' : 'Add'}
         >
@@ -44,10 +45,18 @@ const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
           onClick={() => setOnNetworkPage(!onNetworkPage)}
           aria-label="Chat"
         >
-          chat
+          arrow_forward_ios
         </button>
       </div>
-      {onAddPage ? <AddUser setOnAddPage={setOnAddPage} onAddPage={onAddPage} /> : <NetworkChats setChatId={setChatId} onNetworkPage={onNetworkPage} setOnNetworkPage={setOnNetworkPage} />}
+      {onAddPage ? (
+        <AddUser setOnAddPage={setOnAddPage} onAddPage={onAddPage} />
+      ) : (
+        <NetworkChats
+          setChatId={setChatId}
+          onNetworkPage={onNetworkPage}
+          setOnNetworkPage={setOnNetworkPage}
+        />
+      )}
     </section>
   );
 }
@@ -55,6 +64,7 @@ const Network = ({ onNetworkPage, setOnNetworkPage, setChatId }) => {
 Network.propTypes = {
   onNetworkPage: PropTypes.bool.isRequired,
   setOnNetworkPage: PropTypes.func.isRequired,
+  setChatId: PropTypes.func.isRequired,
 };
 
 export default Network;

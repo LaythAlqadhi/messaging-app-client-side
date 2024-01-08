@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import formatDate from '../utils/formatDate';
 import defaultPFP from '../assets/defaultPFP.png';
 
+function Status({ date, status }) {
+  if (status === 'Success') {
+    return formatDate(date);
+  }
+  if (status === 'Loading') {
+    return (
+      <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-gray-200 border-t-blue-500" />
+    );
+  }
+  return <span className="text-red-500">Error</span>;
+}
+
 function Message({ isSender, pfp, username, content, date, status }) {
   return isSender ? (
     <div className="relative ml-auto flex w-fit items-end">
@@ -12,12 +24,8 @@ function Message({ isSender, pfp, username, content, date, status }) {
       <span className="text-secondary absolute -top-5 right-3 w-fit !text-sm">
         Me
       </span>
-      <span className={`text-secondary absolute top-1/2 -left-3 -translate-x-1/2 -translate-y-1/2 w-fit !text-sm`}>
-        {status === 'Success' ?
-          formatDate(date) :
-          status === 'Loading' ?
-          <span className="inline-block animate-spin rounded-full h-4 w-4 border-2 border-gray-200 border-t-blue-500"></span> :
-        <span className="text-red-500">Error</span>}
+      <span className="text-secondary absolute -left-3 top-1/2 w-fit -translate-x-1/2 -translate-y-1/2 !text-sm">
+        <Status date={date} status={status} />
       </span>
     </div>
   ) : (
@@ -46,6 +54,13 @@ Message.propTypes = {
   isSender: PropTypes.bool.isRequired,
   username: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
+};
+
+Status.propTypes = {
+  date: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default Message;

@@ -41,6 +41,9 @@ function Message({ isSender, pfp, username, content, date, status }) {
       <span className="text-secondary absolute -top-5 left-[4.5rem] w-fit !text-sm">
         {username}
       </span>
+      <span className="text-secondary absolute -right-10 top-1/2 w-fit -translate-x-1/2 -translate-y-1/2 !text-sm">
+        {formatDate(date)}
+      </span>
     </div>
   );
 }

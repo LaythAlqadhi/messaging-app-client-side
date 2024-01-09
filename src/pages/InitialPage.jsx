@@ -63,7 +63,7 @@ function InitialPage() {
         </Link>
         <Link
           className="button button-secondary w-3/4 max-w-lg"
-          to="/auth:signup"
+          to="/auth/signup"
         >
           Sign Up
         </Link>

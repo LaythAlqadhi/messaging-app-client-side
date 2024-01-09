@@ -6,7 +6,7 @@ import TopBarAlert from './TopBarAlert';
 import formatErrorMessage from '../utils/formatErrorMessage';
 
 const API_URL =
-  'https://5f7a2a25-c477-4bb6-a144-6648b07a57e7-00-ima9v6j5x5e.picard.replit.dev/v1/chats';
+  'https://messaging.adaptable.app/v1/chats';
 
 function AddUser({ setOnAddPage, onAddPage }) {
   const { token } = useAuth();

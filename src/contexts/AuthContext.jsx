@@ -7,12 +7,36 @@ const AuthContext = createContext({
   signUp: () => {},
 });
 
-export function AuthProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem('token'));
+const getTokenWithExpiry = () => {
+  const itemStr = localStorage.getItem('token');
+  if (!itemStr) {
+    return null;
+  }
 
-  const signIn = (newToken) => {
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem('token');
+    return null;
+  }
+
+  return item.value;
+};
+
+export function AuthProvider({ children }) {
+  const [token, setToken] = useState(getTokenWithExpiry());
+
+  const signIn = (newToken, expirationInMinutes = 360) => {
+    const now = new Date();
+    const expirationTime = now.getTime() + expirationInMinutes * 60 * 1000;
+    const tokenWithExpiry = {
+      value: newToken,
+      expiry: expirationTime,
+    };
+    
+    localStorage.setItem('token', JSON.stringify(tokenWithExpiry));
     setToken(newToken);
-    localStorage.setItem('token', newToken);
   };
 
   const signOut = () => {

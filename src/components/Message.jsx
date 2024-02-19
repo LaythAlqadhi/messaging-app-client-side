@@ -18,7 +18,7 @@ function Status({ date, status }) {
 function Message({ isSender, pfp, username, content, date, status }) {
   return isSender ? (
     <div className="relative ml-auto flex w-fit items-end">
-      <span className="ml-2 max-w-xs rounded-2xl bg-blue-500 p-3 text-white sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
+      <span className="ml-2 w-fit max-w-xs overflow-hidden break-words rounded-2xl bg-blue-500 p-3 text-white sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
         {content}
       </span>
       <span className="text-secondary absolute -top-5 right-3 w-fit !text-sm">
@@ -35,7 +35,7 @@ function Message({ isSender, pfp, username, content, date, status }) {
         src={pfp}
         alt=""
       />
-      <span className="ml-2 max-w-xs rounded-2xl bg-gray-100 p-3 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
+      <span className="ml-2 w-fit max-w-xs overflow-hidden break-words rounded-2xl bg-gray-100 p-3 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
         {content}
       </span>
       <span className="text-secondary absolute -top-5 left-[4.5rem] w-fit !text-sm">

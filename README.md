@@ -1,4 +1,4 @@
-# Odinbook Client Side
+# Messaging App Client Side
 This this a messaging web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) along with the Tailwind CSS framework for styling.
 Check out the [server-side repo](https://github.com/LaythAlqadhi/messaging-app-server-side).
 

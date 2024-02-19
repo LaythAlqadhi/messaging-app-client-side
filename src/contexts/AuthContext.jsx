@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
       value: newToken,
       expiry: expirationTime,
     };
-    
+
     localStorage.setItem('token', JSON.stringify(tokenWithExpiry));
     setToken(newToken);
   };

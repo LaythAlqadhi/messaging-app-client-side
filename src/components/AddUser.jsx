@@ -5,8 +5,7 @@ import Loading from './Loading';
 import TopBarAlert from './TopBarAlert';
 import formatErrorMessage from '../utils/formatErrorMessage';
 
-const API_URL =
-  'https://messaging.adaptable.app/v1/chats';
+const API_URL = 'https://messaging.adaptable.app/v1/chats';
 
 function AddUser({ setOnAddPage, onAddPage }) {
   const { token } = useAuth();

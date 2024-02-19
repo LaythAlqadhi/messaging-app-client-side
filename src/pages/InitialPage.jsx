@@ -7,8 +7,7 @@ import Loading from '../components/Loading';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const API_URL =
-  'https://messaging.adaptable.app/v1/user/signin';
+const API_URL = 'https://messaging.adaptable.app/v1/user/signin';
 
 function InitialPage() {
   const navigate = useNavigate();

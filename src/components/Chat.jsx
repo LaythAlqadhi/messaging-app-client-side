@@ -6,8 +6,7 @@ import Message from './Message';
 import TopBarAlert from './TopBarAlert';
 import formatErrorMessage from '../utils/formatErrorMessage';
 
-const API_URL =
-  'https://messaging.adaptable.app/v1/chats';
+const API_URL = 'https://messaging.adaptable.app/v1/chats';
 
 function Chat({ onNetworkPage, setOnNetworkPage, chatId }) {
   const { token } = useAuth();

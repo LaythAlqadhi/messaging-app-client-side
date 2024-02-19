@@ -5,8 +5,7 @@ import formatErrorMessage from '../utils/formatErrorMessage';
 import Header from './Header';
 import Footer from './Footer';
 
-const API_URL =
-  'https://messaging.adaptable.app/v1/user/signup';
+const API_URL = 'https://messaging.adaptable.app/v1/user/signup';
 
 function SignUp({ setLoading, setError }) {
   const navigate = useNavigate();

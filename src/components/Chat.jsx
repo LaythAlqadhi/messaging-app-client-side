@@ -178,6 +178,7 @@ function Chat({ onNetworkPage, setOnNetworkPage, chatId }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type a message"
+            required
           />
         </form>
         <div className="m-5 flex items-center gap-2 text-2xl">

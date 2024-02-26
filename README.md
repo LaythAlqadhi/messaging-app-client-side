@@ -16,9 +16,10 @@ Check out the web application [Messaging App](https://messaging-app-three.vercel
 - Not Found page
 
 ## Features
-- Unauthenticated users cannot access private routes.
-- Users can send and receive messages in a private chat room.
-- Users can add each other by entering the username of the user they want to chat with.
+- Developed a chat page allowing users to send and receive messages in a private chat room.
+- Enabled users to add each other by entering the username of the desired chat partner.
+- Ensured robust authentication using JWT, supporting username-password method.
+- Prioritized responsive design and accessibility compliance to ensure seamless user experience across devices and inclusivity for all users.
 
 ## Installation
 1. **Clone the Repository:**

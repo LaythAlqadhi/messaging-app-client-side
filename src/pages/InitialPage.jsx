@@ -50,7 +50,7 @@ function InitialPage() {
   return loading ? (
     <Loading />
   ) : (
-    <div className="flex h-screen w-full flex-col items-center justify-between py-4">
+    <div className="flex h-dvh w-full flex-col items-center justify-between py-4">
       {error && <TopBarAlert message={error} />}
       <Header content="The simple way to text right from your browser." />
       <main className="flex w-full flex-col items-center gap-5">

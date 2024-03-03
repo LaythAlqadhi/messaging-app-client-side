@@ -7,7 +7,7 @@ function ChatPage() {
   const [chatId, setChatId] = useState(null);
 
   return (
-    <div className="relative grid grid-cols-2 grid-rows-[100vh] overflow-hidden border border-2 border-gray-200 md:grid-cols-[35%,_65%] ">
+    <div className="h-dvh relative grid grid-cols-2 grid-rows-[100vh] overflow-hidden border border-2 border-gray-200 md:grid-cols-[35%,_65%] ">
       <Network
         onNetworkPage={onNetworkPage}
         setOnNetworkPage={setOnNetworkPage}

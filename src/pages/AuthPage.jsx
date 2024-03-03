@@ -13,7 +13,7 @@ function AuthPage() {
   if (loading) return <Loading />;
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-between py-4">
+    <div className="flex h-dvh w-full flex-col items-center justify-between py-4">
       {error && <TopBarAlert message={error} />}
       {authType === 'signin' ? (
         <SignIn setLoading={setLoading} setError={setError} />

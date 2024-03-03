@@ -130,7 +130,7 @@ function Chat({ onNetworkPage, setOnNetworkPage, chatId }) {
         onNetworkPage
           ? 'max-[767px]:-translate-x-1/2'
           : 'max-[767px]:translate-x-1/2'
-      } tansiton-transform border-1 flex flex-col justify-between border border-gray-200 duration-300 max-[767px]:w-screen`}
+      } h-dvh tansiton-transform border-1 flex flex-col justify-between border border-gray-200 duration-300 max-[767px]:w-screen`}
       aria-hidden={onNetworkPage ? 'true' : 'false'}
       tabIndex={onNetworkPage ? '-1' : '0'}
     >
